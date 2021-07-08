@@ -1,0 +1,297 @@
+[
+  {
+    "Description": "The White Fulani is a triple-purpose animal, with milk production of 2,300 kg per lactation. It may be fattened for beef, kept for milk production, or used as a draught animal, especially the bull.",
+    "PurchasePrice": 74132.77,
+    "SellingPrice": 82465.09,
+    "Discount": 4375.98,
+    "quantity": 67,
+    "Weight": 219,
+    "MarketId": "1",
+    "CategoryId": "1",
+    "Sex": 0,
+    "Breed": "White Fulani (Bunaji)",
+    "Color": "White",
+    "Age": 8,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623060914/cow-grazing-cartoon_vpwvxu.png"
+
+  },
+
+  {
+    "Description": "This cattle type is known for its ability to produce meat.",
+    "PurchasePrice": 71114.98,
+    "SellingPrice": 83926.22,
+    "Discount": 1340.35,
+    "quantity": 0,
+    "Weight": 219,
+    "MarketId": "1",
+    "CategoryId": "1",
+    "Sex": 1,
+    "Breed": "Red Bororo (Rahaji)",
+    "Color": "Red",
+    "Age": 3,
+    "Availability": false,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623060914/cow-grazing-cartoon_vpwvxu.png"
+  },
+
+
+  {
+    "Description": "This breed is characterized by a short fine coat. Both male and female have horns, these animals well adapted for long-distance trekking, and can survive in desert areas of the country.",
+    "PurchasePrice": 53481.27,
+    "SellingPrice": 61758.92,
+    "Discount": 3843.4,
+    "Quantity": 24,
+    "Weight": 32.3,
+    "MarketId": "3",
+    "CategoryId": "2",
+    "Sex": 0,
+    "Breed": "Sahel",
+    "Color": "Cream",
+    "Age": 4,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623060890/Goat_pdcx2h.jpg"
+  },
+
+  {
+    "Description": "This breed is very valued for leather production.",
+    "PurchasePrice": 51124.79,
+    "SellingPrice": 63180.72,
+    "Discount": 3873.24,
+    "Quantity": 12,
+    "Weight": 28.3,
+    "MarketId": "3",
+    "CategoryId": "2",
+    "Sex": 1,
+    "Breed": "Red Sokoto (Maradi)",
+    "Color": "Red",
+    "Age": 6,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623060890/Goat_pdcx2h.jpg"
+  },
+
+
+  {
+    "Description": "They are white, long body with erect ears, they make good mothers.",
+    "PurchasePrice": 51051.62,
+    "SellingPrice": 63600.89,
+    "Discount": 1244.01,
+    "Quantity": 0,
+    "Weight": 371.63,
+    "MarketId": "5",
+    "CategoryId": "3",
+    "Sex": 0,
+    "Breed": "Yorkshire",
+    "Color": "White",
+    "Age": 5,
+
+    "Availability": false,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063522/pigdummy_lpe1bl.png"
+  },
+  {
+    "Description": "They are white with large drooping ears, long body and they make good mothers. They are noted for having the highest number of pigs per litter. They are good for bacon production.",
+    "PurchasePrice": 50028.64,
+    "SellingPrice": 63393.9,
+    "Discount": 2032.73,
+    "Quantity": 57,
+    "Weight": 379.01,
+    "MarketId": "5",
+    "CategoryId": "3",
+    "Sex": 1,
+    "Breed": "Landrace",
+    "Color": "White",
+    "Age": 4,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063522/pigdummy_lpe1bl.png"
+  },
+
+
+  {
+    "Description": "They are black with white belt and are muscular. They are good for bacon production. They have a high prolificacy, with a litter size of 9 with high weaning rate.",
+    "PurchasePrice": 54244.73,
+    "SellingPrice": 62284.46,
+    "Discount": 3188.71,
+    "Quantity": 26,
+    "Weight": 158.40,
+    "Sex": 0,
+    "Breed": "Hampshire",
+    "MarketId": "5",
+    "CategoryId": "3",
+    "Color": "Black",
+    "Age": 6,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063522/pigdummy_lpe1bl.png"
+  },
+
+  {
+    "Description": "This is a predominantly hairy breed with a pronounced convex heat and a dull depression. It has a dewlap-like fold of skin with white mane. The ear is large and droopy. The tail is long. Horns are prominent in rams and are usually absent in ewes.",
+    "PurchasePrice": 54487.5,
+    "SellingPrice": 60947.57,
+    "Discount": 3288.6,
+    "Quantity": 0,
+    "Weight": 53.90,
+    "MarketId": "6",
+    "CategoryId": "4",
+    "Sex": 1,
+    "Breed": "Balami",
+    "Color": "White",
+    "Age": 6,
+    "Availability": false,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063072/ramdummy_o2h2bm.png"
+  },
+
+  {
+    "Description": "The breed is a small compact hardy breed. The breed is considered to be tolerant to trypanosomiasis.",
+    "PurchasePrice": 52967.3,
+    "SellingPrice": 62624.54,
+    "Discount": 2868.33,
+    "Quantity": 36,
+    "Weight": 20.44,
+    "MarketId": "6",
+    "CategoryId": "4",
+    "Sex": 0,
+    "Breed": "West African Dwarf Sheep",
+    "Color": "Brown",
+    "Age": 6,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063072/ramdummy_o2h2bm.png"
+  },
+
+
+  {
+    "Description": "Guinea fowls are kept or reared for meat and egg purposes. ",
+    "PurchasePrice": 17322.17,
+    "SellingPrice": 23662.55,
+    "Discount": 1605.02,
+    "Quantity": 38,
+    "Weight": 1.7,
+    "MarketId": "2",
+    "CategoryId": "5",
+    "Sex": 1,
+    "Breed": "Guinea Fowl",
+    "Color": "Black",
+    "Age": 9,
+
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063735/chickenAvatar_bmfuoa.png"
+  },
+  {
+    "Description": "Turkeys are kept or reared for meat purposes. ",
+    "PurchasePrice": 17636.41,
+    "SellingPrice": 21067.26,
+    "Discount": 970.64,
+    "Quantity": 103,
+    "Weight": 11.48,
+    "MarketId": "2",
+    "CategoryId": "5",
+    "Sex": 0,
+    "Breed": "Turkey",
+    "Color": "White",
+    "Age": 4,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063735/chickenAvatar_bmfuoa.png"
+  },
+
+  {
+    "Description": "This are kept or reared for meat purposes. ",
+    "PurchasePrice": 4833.77,
+    "SellingPrice": 6042.73,
+    "Discount": 1607.78,
+    "Quantity": 38,
+    "Weight": 15.93,
+    "MarketId": "2",
+    "CategoryId": "5",
+    "Sex": 1,
+    "Breed": "Broiler",
+    "Color": "Black",
+    "Age": 15,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063735/chickenAvatar_bmfuoa.png"
+  },
+
+
+  {
+    "Description": "The Hyla is a product of a laboratory experiment. It has properties makes the most sort after for meat production.",
+    "PurchasePrice": 4539,
+    "SellingPrice": 6708.81,
+    "Discount": 1586.11,
+    "Quantity": 0,
+    "Weight": 1.70,
+    "MarketId": "4",
+    "CategoryId": "6",
+    "Sex": 0,
+    "Breed": "Hyla",
+    "Color": "White",
+    "Age": 8,
+    "Availability": false,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063924/rabbitdummy_fr48mt.jpg"
+  },
+
+  {
+    "Description": "They are often bred for meat and laboratory uses and can also be bred as pet rabbits",
+    "PurchasePrice": 4596.45,
+    "SellingPrice": 6361.54,
+    "Discount": 1031.62,
+    "Quantity": 0,
+    "Weight": 3.11,
+    "MarketId": "4",
+    "CategoryId": "6",
+    "Sex": 1,
+    "Breed": "New Zealand",
+    "Color": "Gray",
+    "Age": 3,
+    "Availability": false,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063924/rabbitdummy_fr48mt.jpg"
+  },
+
+  {
+    "Description": "Its body has no scales, it has omnivorous feeding habit and is very tasty.",
+    "PurchasePrice": 3424.65,
+    "SellingPrice": 6010.08,
+    "Discount": 1288.68,
+    "Quantity": 81,
+    "Weight": 1.04,
+    "MarketId": "7",
+    "CategoryId": "7",
+    "Sex": 0,
+    "Breed": "Catfish",
+    "Color": "Gray",
+    "Age": 3,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063096/fish_tnn4ga.png"
+  },
+  {
+    "Description": "Tilapia is a fish species that lives in fresh shallow water. It reproduces very rapidly and grows fast too.",
+    "PurchasePrice": 3096.1,
+    "SellingPrice": 6472.24,
+    "Discount": 1112.58,
+    "Quantity": 52,
+    "Weight": 1.23,
+    "MarketId": "7",
+    "CategoryId": "7",
+    "Sex": 1,
+    "Breed": "Tilapia",
+    "Color": "Gray",
+    "Age": 2,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063096/fish_tnn4ga.png"
+  },
+
+
+  {
+    "Description": "A predatory marine fish with a greenish-blue back, important as a food fish.",
+    "PurchasePrice": 1729.86,
+    "SellingPrice": 5936.3,
+    "Discount": 1767.08,
+    "Quantity": 44,
+    "Weight": 0.32,
+    "MarketId": "7",
+    "CategoryId": "7",
+    "Sex": 0,
+    "Breed": "Mackerel (Titus)",
+    "Color": "Greenish-blue",
+    "Age": 1,
+    "Availability": true,
+    "LiveStockImage": "https://res.cloudinary.com/obioram/image/upload/v1623063096/fish_tnn4ga.png"
+  }
+]
+        

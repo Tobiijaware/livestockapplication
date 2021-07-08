@@ -1,0 +1,146 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{ 
+    ViewBag.Area = "private";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - AnimalFarmsMarket.Core</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link href="~/lib/font-awesome/css/fontawesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/OrderStyle.css" rel="stylesheet" />
+    <script>var currentUser = '@HttpContextAccessor.HttpContext.Session.GetString("UserId")';</script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+    <script src="~/js/cart.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="top-navbar-dashboard">
+            <div class="top-navbar-dashboard-columns" style="width:75%; margin:0 auto;">
+                <div class="top-navbar-dashboard-col-one">
+                    <div class="" style="position:relative; overflow:hidden; width:80px; height:70px; margin-left:20px;">
+                        <a asp-action="index" asp-controller="home"><img src="~/images/assets/footer-logo.png" alt="live stock delivery" style="margin:-20px 0px 0px -14px" /></a>
+                    </div>
+                </div>
+                <div class="top-navbar-dashboard-col-two">
+                    <div class="top-navbar-dashboard-search-div">
+                        <div>
+                            <img src="~/images/assets/search.png" alt="search" class="p-2" />
+                        </div>
+
+                        <div class=" flex-1 ">
+                            <input type="text" class="top-navbar-dashboard-search-input" aria-label="Text input with radio button" placeholder="eg orders">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="top-navbar-dashboard-col-three">
+                    <div>
+                        <i class="bi bi-bell"></i>
+                    </div>
+                    <div>
+                        <partial name="_UserNavThumbnailPartial" />
+                    </div>
+                </div>
+                <div class="mobile-nav-hamburger-order">
+                    <div>
+                        <a href="#"><i class="bi bi-bag"></i></a>
+                    </div>
+
+                    <div class="pt-3">
+                        <input type="checkbox" id="nav-menu1"/>
+                        <label id="nav-icon1" for="nav-menu1">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="">
+        <main role="main" class="d-flex" style="min-height:70vh">
+            <nav id="toggle-ham-menu" class="side-navbar-dashboard ham-menu-hide">
+                <div class="side-navbar-dashboard-options">
+                    <ul class="border-0 position-relative w-100 ">
+                        @if (!string.IsNullOrWhiteSpace(HttpContextAccessor.HttpContext.Session.GetString("activeStatus"))
+                           && HttpContextAccessor.HttpContext.Session.GetString("activeStatus") == "True")
+                        {
+                            <li><div class="tooltip1"><a href="#"><i class="bi bi-house mr-3"></i></a><span class="tooltiptext">Overview</span> </div></li>
+                        }
+                        <li><div class="tooltip1"><a asp-controller="Dashboard" asp-action="Profile" asp-route-q="update-profile"><i class="bi bi-person mr-3"></i></a><span class="tooltiptext">Profile</span> </div></li>
+                        @if (!string.IsNullOrWhiteSpace(HttpContextAccessor.HttpContext.Session.GetString("activeStatus"))
+                          && HttpContextAccessor.HttpContext.Session.GetString("activeStatus") == "True")
+                        {
+                            <li><div class="tooltip1"><a asp-controller="Dashboard" asp-action="Orders"><i class="bi bi-bag mr-3"></i></a><span class="tooltiptext">Orders</span> </div></li>
+                            @if ((await _authorization.AuthorizeAsync(User, "CustomerRolePolicy")).Succeeded)
+                            {
+                                <li><div class="tooltip1"><a asp-controller="Dashboard" asp-action="Invoice" asp-route-page="1"><i class="bi bi-receipt mr-3"></i></a><span class="tooltiptext">Invoice</span> </div></li>
+                            }
+                            <li><div class="tooltip1"><a asp-controller="Dashboard" asp-action="PaymentHistory" asp-route-page="1"><i class="bi bi-credit-card mr-3"></i></a><span class="tooltiptext">Payments</span> </div></li>
+                            <li><div class="tooltip1"><a asp-controller="Dashboard" asp-action="TrackOrders"><i class="bi bi-geo-alt-fill mr-3"></i></a><span class="tooltiptext">Track Order</span> </div></li>
+                            @if ((await _authorization.AuthorizeAsync(User, "AdminAndDeliveryRolePolicy")).Succeeded)
+                            {
+                                <li><div class="tooltip1"><a asp-controller="Dashboard" asp-action="DeliveryAssignment"><i class="bi bi-truck mr-3"></i></a><span class="tooltiptext">Delivery</span> </div></li>
+                            }
+                        }
+                        <li>
+                            <div class="tooltip1">
+                                <form asp-controller="Account" asp-action="Logout" method="post">
+                                    <button type="submit" class="btn btn-link text-danger" style="padding:0px">
+                                        <i class="bi bi-box-arrow-in-right mr-3"></i>
+                                        <span class="tooltiptext">Log out</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="side-navbar-dashboard-empty">
+                </div>
+            </nav>
+            <div class="layout-color w-100">
+                @RenderBody()
+            </div>
+        </main>
+        <partial name="_FooterLowerPartial" />
+    </div>
+
+    <script src="~/js/Order.js"></script>
+    <script src="~/js/MarketPlaceScript.js"></script>
+    <script src="~/js/Assignment.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/font-awesome/js/fontawesome.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Add down arrow icon for collapse element which is open by default
+            $(".collapse.show").each(function () {
+                $(this).prev(".heading").find(".fa").addClass("fa-angle-down").removeClass("fa-angle-right");
+            });
+            // Toggle right and down arrow icon on show hide of collapse element
+            $(".collapse").on('show.bs.collapse', function () {
+                $(this).prev(".heading").find(".fa").removeClass("fa-angle-right").addClass("fa-angle-down");
+            }).on('hide.bs.collapse', function () {
+                $(this).prev(".heading").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-right");
+            });
+        });
+    </script>
+    <script src="~/js/MarketPlaceScript.js"></script>
+    @RenderSection("Scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            updateShoppingCart();
+            setInterval(updateShoppingCart, 5000);
+        });
+    </script>
+</body>
+</html>

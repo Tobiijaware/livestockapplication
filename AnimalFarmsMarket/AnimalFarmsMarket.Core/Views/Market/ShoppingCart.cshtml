@@ -1,0 +1,28 @@
+﻿<div class="container" style="color: #737373;">
+    <div class="row pt-4 pr-4">
+        <div class="col-lg-12 d-flex align-items-end pt-lg-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent">
+                    <li class="breadcrumb-item text-decoration-none"><a href="#" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item text-decoration-none"><a href="#" class="text-decoration-none">Market</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+                </ol>
+            </nav>
+
+        </div>
+    </div>
+
+    <h3 class="d-inline">Shopping Cart</h3><span id="number-of-items"></span>
+    <hr />
+    <table class="table table-borderless" id="shopping-cart-table" style="color: #737373">
+        <tr class="border-0">
+            <th>Product Details</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>
+        </tr>
+    </table>
+    <div class="d-flex flex-row-reverse">
+        <a asp-controller="market" asp-action="shippingdetails" class="btn" style="background-color: #06864D; color: white; font-family: inherit">Proceed Checkout</a>
+    </div>
+</div>

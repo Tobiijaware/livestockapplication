@@ -1,0 +1,2 @@
+2021-07-07 08:39:02.0412 ERROR|AnimalFarmsMarket.Core.ErrorController| /lib/font-awesome/css/fontawesome.min.css
+2021-07-07 08:39:02.4314 ERROR|AnimalFarmsMarket.Core.ErrorController| /lib/font-awesome/js/fontawesome.min.js

@@ -1,0 +1,295 @@
+﻿@model LivestockInfoListViewModel
+
+@{ ViewData["Title"] = "Home Page";
+    var location = ViewData["Location"];
+
+    var defaultPhoto = "https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/02/14/16/berkeley-farm-dairy.jpg";
+
+
+    var error = ViewData["Error"];
+    var errorLocation = ViewData["ErrorLocation"];
+    bool check = false;
+    if (location == null)
+    {
+        check = true;
+    } 
+    
+    }
+
+
+
+
+<div class="container " style="margin-bottom: 5%">
+
+    <div class="row pt-4 pr-4">
+        <div class="col-lg-12 d-flex align-items-end pt-lg-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent">
+                    <li class="breadcrumb-item text-decoration-none"><a href="#" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item text-decoration-none"><a href="#" class="text-decoration-none">Location</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Market</li>
+                </ol>
+            </nav>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 d-flex flex-column">
+            <!--     START ACCORDION NAV-->
+
+
+
+            @await Html.PartialAsync("_LocationPartial", Model.Info)
+
+
+
+            <!--     STOP ACCORDION NAV-->
+
+
+        </div>
+
+
+
+        <div class="col-lg-9 mb-4">
+
+
+            <div class=" col-sm-12">
+                <div class="jumbotron bg-transparent p-2 d-flex justify-content-lg-between" style="border-bottom: 2px solid #e2e2e2; border-radius:0px;">
+                    <div class="text-secondary pb-2 flex-grow-1">
+                        <h1 class="font-weight-bolder">
+                            Cattle Market
+                        </h1>
+                        <h5 class="font-weight-light">
+                            @location Market
+                        </h5>
+                    </div>
+                    <div class="d-flex flex-lg-column-reverse justify-content-lg-center">
+                        <div class="form-inline d-flex align-items-center">
+                            <button class="myAdBtn noselect" data-toggle="modal" data-target="#searchByParamsModal">
+                                <span class='text'>Search</span>
+                                <span class="icon fa fa-search"></span>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            
+
+            <div id="customerInformation">
+              
+                    <div class="d-flex flex-wrap justify-content-start col-lg-12 col-sm-12">
+                        @if (location != null && errorLocation != null)
+                        {
+            <div class="">
+                <h3 class="text-info p-3">
+                    There Are No Market in the Current Location.
+                </h3>
+
+            </div> }
+                        else if (location == null && check == true)
+                        {
+            <div class="">
+                <h3 class="text-info p-2 font-weight-light">
+                    Please Select a Valid Parameter. Thank You! &#128578;
+                </h3>
+
+            </div> }
+                        else if (location == null && check == false)
+                        {
+            <div class="">
+                <h3 class="text-info p-2 font-weight-light">
+                    Please Select a Market or a Valid Parameter. Thank You! &#128578;
+                </h3>
+
+            </div> }
+                        else
+                        {
+
+
+
+
+            @foreach (var item in @Model.Data.ResponseData)
+            {
+<div class="col-lg-4 col-sm-6 p-lg-2 p-sm-2 p-4 flex-wrap flex-sm-wrap">
+    <div class="card hover hover-2 text-white rounded">
+
+        <a asp-controller="Market" asp-action="Details" asp-route-id="@item.Id" style="cursor:pointer">
+            <img style="border-radius: 5px;" src="@defaultPhoto"
+                 alt="livestock" height="300" width="300">
+        </a>
+
+        <div class="hover-2-content px-5 py-4">
+            <h3 class="hover-2-title text-capitalize font-weight-light mb-0">Animal-Id: @item.Id</h3>
+            <h3 class="hover-2-price text-white font-weight-bold mb-0">N @item.Price</h3>
+            <a class="addBtn hover-2-description text-uppercase mb-4" data-price="{ @item.Price}"
+               data-quantity="1" data-item-id="{ @item.Id}" onclick="addToCart(event)" style="cursor:pointer">Add to Cart</a>
+
+        </div>
+    </div>
+</div>}}
+
+
+
+                    </div>
+               
+
+
+            </div>
+
+            <div class="d-flex flex-wrap flex-sm-wrap col-lg-12 col-sm-12 justify-content-center" style="margin-top:2.5em; margin-bottom:2em">
+
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+
+                            @if (@Model == null)
+                            {
+
+                            }
+                            else if (@Model.Data == null && @error != null)
+                            {
+
+
+
+                            }
+                            else
+                            {
+
+
+
+
+
+                    @for (int i = 1; i <= Model.Data.PageMetaData.TotalPages; i++)
+                    {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index-fetchAll" asp-controller="Market" asp-route-location="@location" asp-route-page=@i>@i</a>
+                    </li>
+                        }}
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Search by parameters modal-->
+<div class="modal fade" id="searchByParamsModal" tabindex="-1" role="dialog" aria-labelledby="searchByParams" aria-hidden="true">
+    <div id="search-modal-dialog" class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <button type="button" class="close text-right pr-3" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body">
+
+
+
+                <div id="" class="px-5 py-3 text-center">
+                    <h3 class="site-color">
+                        <b>You are one step closer to buying your livestock</b>
+                    </h3><br>
+                    <h5 class="site-color">Fill in the required information</h5><br>
+
+                    <div class="mb-5 row">
+                        <div class="col-lg-12">
+                            <div class="d-flex justify-content-center align-items-center float-right rounded-circle mh-30px mw-30px
+                                                bg-secondary-green-site bx-shadow-green-hover"
+                                 data-toggle="tooltip" data-placement="bottom" title="View All Products">
+                                <a asp-action="Index-fetchAll" asp-controller="Market" asp-route-location="@location" class="d-flex justify-content-center align-items-center rounded-circle mh-27px mw-27px border-green-site"
+                                   style="cursor:pointer;">
+                                    <span class="text-white">?</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form asp-controller="Market" asp-action="IndexByQuery" method="get">
+                        <input name="type" id="type" type="hidden" value="" />
+                        <input name="breed" id="breed" type="hidden" value="" />
+                        <input name="sex" id="sex" type="hidden" value="" />
+                        <input name="weight" id="weight" type="hidden" value="" />
+                        <input name="page" id="page" type="hidden" value="1" />
+                        <input name="livestockLocation" id="livestockLocation" type="hidden" value="locate" />
+
+                        <div class="row text-grey">
+                            <div class="col-sm-4">
+                                <div class="dropdown-container">
+                                    <div class="dropdown w-100 w-sm-100 blue-shadow">
+                                        <button class="btn btn-light text-left w-100" type="button" data-toggle="dropdown">
+                                            <span class="text-grey dropdown-text">Type</span>
+                                            <span class="caret float-right text-grey">
+                                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            </span>
+                                        </button>
+                                        <ul class="dropdown-menu mt-0 w-100 text-grey blue-shadow">
+                                            @foreach (var item in Enum.GetNames(typeof(LivestockCategory)))
+                                            {
+                                <li class="pl-3 py-2 dropdown-item livestock-category selected-livestock-type" data-type="@item">
+                                    @item
+                                </li>
+}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="dropdown-container">
+                                    <div class="dropdown w-100 w-sm-100 blue-shadow">
+                                        <button class="btn btn-light text-left w-100" type="button" data-toggle="dropdown">
+                                            <span class="text-grey dropdown-text">Breed</span>
+                                            <span class="caret float-right text-grey">
+                                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            </span>
+                                        </button>
+                                        <ul id="breed-list" class="dropdown-menu mt-0 w-100 text-grey blue-shadow">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="dropdown-container">
+                                    <div class="dropdown w-100 w-sm-100 blue-shadow">
+                                        <button class="btn btn-light text-left w-100" type="button" data-toggle="dropdown">
+                                            <span class="text-grey dropdown-text">Sex</span>
+                                            <span class="caret float-right text-grey">
+                                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            </span>
+                                        </button>
+                                        <ul id="sex-list" class="dropdown-menu mt-0 w-100 text-grey blue-shadow">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="dropdown-container">
+                                    <div class="dropdown w-100 blue-shadow">
+                                        <button class="btn btn-light text-left w-100" type="button" data-toggle="dropdown">
+                                            <span class="text-grey dropdown-text">Weight</span>
+                                            <span class="caret float-right text-grey">
+                                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            </span>
+                                        </button>
+                                        <ul id="weight-list" class="dropdown-menu mt-0 w-100 text-grey blue-shadow">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-green text-white mt-100px" id="searchLivestock" data-toggle="tooltip" data-placement="bottom"
+                                title="View All Product" style="width:150px;">
+                            Search
+                        </button>
+                    </form>
+                </div><br><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_FooterMidPartial" />
+<partial name="_FooterLowerPartial" />

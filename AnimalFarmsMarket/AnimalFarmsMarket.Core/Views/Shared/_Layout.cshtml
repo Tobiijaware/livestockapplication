@@ -1,0 +1,168 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/owl-carousel/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/owl-carousel/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Market.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/modals.css"/>
+    <link rel="stylesheet" href="~/css/DetailsPage.css"/>
+    <title>@ViewBag.Title</title>
+    <script>var currentUser = '@HttpContextAccessor.HttpContext.Session.GetString("UserId")';</script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+    <script src="~/js/cart.js"></script>
+</head>
+<body class=" bg-light">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light p-0 home-nav">
+            <div class="container d-flex px-0 flex-row">
+                <div class="top-navbar-dashboard-col-one">
+                    <div class="" style="position:relative; overflow:hidden; width:90px; height:70px; ">
+                        <a asp-action="index" asp-controller="home">
+                            <img src="~/images/assets/footer-logo.png" alt="live stock delivery" style="margin: -20px 0px 0px -14px;" />
+                        </a>
+                    </div>
+                </div>
+
+                <button class="hamburger">&#9776;</button>
+                <button class="cross">&#735;</button>
+                <div class="navbar-collapse collapse d-sm-inline-flex navbar-links justify-content-end menu flex-grow-0">
+                    <ul class="navbar-nav align-items-center justify-content-around">
+                        <li class="nav-item dropdown px-2">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
+                        </li>
+                        <li class="nav-item dropdown px-2">
+                            <a class="text-light dropdown-toggle" data-toggle="dropdown">Be a Partner<span class="caret"></span> </a>
+                            <ul class="dropdown-menu partner-menu text-center border-0">
+                                <li class="partner" style="overflow:hidden;"><a style="width:100%; display:block; height:inherit;" asp-controller="Account" asp-action="AboutAgent">Be an Agent</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown px-2">
+                            <a class="nav-link text-light pad-home-nav" data-toggle="modal" id="testcreate-agent__btn" data-target="#track" href="">Track Livestock</a>
+                        </li>
+                        <li class="nav-item dropdown px-2">
+                            <a class="nav-link text-light"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex navbar-btn menu">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end nav-lower">
+                        <li class="nav-item dropdown">
+                            <button class="text-light button-primary btn shadow buy-now-btn" data-toggle="modal" data-target="#preferredLocationModal">Buy Now</button>
+                        </li>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <form asp-action="Login" asp-controller="Account" method="get">
+                                    <button type="submit" class="text-light button-secondary btn shadow login-nav-btn">Login</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <partial name="_UserNavThumbnailPartial" />
+                            </li>
+                        }
+                        <li class="nav-item dropdown">
+                            <div class="drop">
+                                <a href="#">
+                                    <i class="bi bi-cart2" style="font-size:28px; color:#fff;"></i>
+                                    <span id="shoppingCart-badge" class="badge badge-light rounded-circle"
+                                          style="font-size:10px;color:#2078bf; margin-left:-1em;top:-2em">0</span>
+                                </a>
+                                <div class="dropdown-content">
+                                    <div id="menu-cart">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="body-con">
+        @RenderBody()
+    </div>
+
+
+
+    <!-- Locations Modal -->
+    <div class="modal fade" id="preferredLocationModal" tabindex="-1" role="dialog" aria-labelledby="preferredLocation" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <button type="button" class="close text-right pr-3" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body">
+                    <form asp-controller="Market" asp-action="Index" method="GET">
+                        <input name="page" id="page" type="hidden" value="1" />
+                        <input name="location" id="location" type="hidden" value="" />
+                        <div id="" class="px-5 py-3 text-center">
+                            <h3 class="site-color"><b><span>Choose your preferred</span> location</b></h3><br>
+                            <h5 class="site-color">This displays all products associated with the chosen address</h5><br>
+                            <div class="dropdown-container modal-dropdown-container">
+                                <div class="dropdown modal-dropdown w-75 bg-white">
+                                    <button class="btn btn-light text-left w-100" type="button" data-toggle="dropdown">
+                                        <span class="pl-2 dropdown-text text-grey">Location</span>
+                                        <span class="caret float-right">
+                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                    <ul class="dropdown-menu mt-0 w-100" style="overflow-y:auto; max-height:150px;">
+                                        @foreach (var state in Enum.GetNames(typeof(States)))
+                                        {
+                                            <li class="pl-3 py-2 dropdown-item text-grey">@state</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-green text-white mt-70px" id="ctn" style="width:150px;">Continue</button>
+                        </div><br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal container. Javascript was used to fill the content -->
+    <div class="modal fade mx-0" id="cartModal" tabindex="-1" style="z-index:12000!important" role="dialog" aria-labelledby="cart" aria-hidden="true">
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/popper/popper.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/MarketPlaceScript.js" asp-append-version="true"></script>
+    <script src="~/js/Market.js" asp-append-version="true"></script>
+    <script src="~/js/modals.js" asp-append-version="true"></script>
+    <script src="~/js/DetailsPage.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            // Add down arrow icon for collapse element which is open by default
+            $(".collapse.show").each(function () {
+                $(this).prev(".heading").find(".fa").addClass("fa-angle-down").removeClass("fa-angle-right");
+            });
+            // Toggle right and down arrow icon on show hide of collapse element
+            $(".collapse").on('show.bs.collapse', function () {
+                $(this).prev(".heading").find(".fa").removeClass("fa-angle-right").addClass("fa-angle-down");
+            }).on('hide.bs.collapse', function () {
+                $(this).prev(".heading").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-right");
+            });
+            updateShoppingCart();
+            setInterval(updateShoppingCart, 5000);
+            fillCartTable();
+            setInterval(UpdateCheckoutPage, 2000);
+        });</script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

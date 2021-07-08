@@ -1,0 +1,13 @@
+2021-06-04 15:42:54.9293 INFO User profile is available. Using 'C:\Users\hp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-06-04 15:42:55.8371 INFO Application started. Press Ctrl+C to shut down.
+2021-06-04 15:42:55.8465 INFO Hosting environment: Development
+2021-06-04 15:42:55.8644 INFO Content root path: C:\Users\hp\Source\Repos\livestock-platform\AnimalFarmsMarket\AnimalFarmsMarket.Core
+2021-06-04 15:42:55.9467 INFO Request starting HTTP/1.1 GET http://localhost:64048/  
+2021-06-04 15:42:56.0648 INFO Executing endpoint 'AnimalFarmsMarket.Core.Controllers.HomeController.Index (AnimalFarmsMarket.Core)'
+2021-06-04 15:42:56.2200 INFO Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller AnimalFarmsMarket.Core.Controllers.HomeController (AnimalFarmsMarket.Core).
+2021-06-04 15:42:56.3788 ERROR Value cannot be null. (Parameter 'Arguement cannot be null')
+2021-06-04 15:42:56.4610 INFO Executing ViewResult, running view Index.
+2021-06-04 15:42:56.8267 INFO Executed ViewResult - view Index executed in 380.5047ms.
+2021-06-04 15:42:56.8267 INFO Executed action AnimalFarmsMarket.Core.Controllers.HomeController.Index (AnimalFarmsMarket.Core) in 605.8924ms
+2021-06-04 15:42:56.8448 INFO Executed endpoint 'AnimalFarmsMarket.Core.Controllers.HomeController.Index (AnimalFarmsMarket.Core)'
+2021-06-04 15:42:56.8604 INFO Request finished in 916.0745ms 200 text/html; charset=utf-8

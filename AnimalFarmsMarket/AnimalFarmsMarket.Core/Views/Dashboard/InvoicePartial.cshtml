@@ -1,0 +1,108 @@
+﻿@model PagedInvoiceViewModel
+@using AnimalFarmsMarket.Data.Enum;
+
+
+@{
+
+
+    var gender = Enum.GetNames(typeof(Gender));
+    var dataCount = Model.ResponseData.Count();
+
+}
+
+
+@if (dataCount > 0)
+{
+    <div style="display:flex; align-items:center;height:50px">
+        <p style="margin-left:50px;margin-bottom:7px;font-weight:bold">ORDER DETAILS</p>
+    </div>
+
+    foreach (var order in @Model.ResponseData)
+    {
+        <div class="" style="border-radius:0">
+            <div class="heading" id="header">
+                <h2 class="mb-0" id="flush-headingTwo">
+                    <button class="d-flex btn btn-link btn-block text-left collapsed pl-5" style="box-shadow: none; border-color: rgba(0,0,0,.125);font-weight:lighter;text-decoration:none;border-radius:0" type="button" data-toggle="collapse" data-target="#flush-collapseTwo_@order.Id" aria-expanded="true" aria-controls="flush-collapseTwo">
+                        ID-@order.Id <i class="fa fa-angle-right" style="width:100px;color:grey;margin-left:auto"></i>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="flush-collapseTwo_@order.Id" class="collapse" aria-labelledby="flush-headingTwo" data-parent="#accordionFlushExample">
+                <div class="" style="margin:20px 30px 20px 30px;">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr style="border-radius:0">
+                                    <th scope="col" style="font-weight:normal">Type</th>
+                                    <th scope="col" style="font-weight:normal">Sex</th>
+                                    <th scope="col" style="font-weight:normal">Date</th>
+                                    <th scope="col" style="font-weight:normal">Quantity</th>
+                                    <th scope="col" style="font-weight:normal">Weight</th>
+                                    <th scope="col" style="font-weight:normal">Product Amount</th>
+                                    <th scope="col" style="font-weight:normal">Delivery Amount</th>
+                                    <th scope="col" style="font-weight:normal">Total Amount</th>
+                                </tr>
+                            </thead>
+                            @foreach (var orderitem in order.OrderItems)
+                            {
+                                var totalamount = @orderitem.Total + order.ShippingPlan.DeliveryCost;
+                                <tbody>
+                                    <tr style="border-radius:0">
+                                        <td>@orderitem.Livestock.Breed</td>
+                                        <td>@gender[@orderitem.Livestock.Sex]</td>
+                                        <td>@orderitem.DateCreated</td>
+                                        <td>@orderitem.Quantity</td>
+                                        <td>@orderitem.Livestock.Weight</td>
+                                        <td>@orderitem.Livestock.SellingPrice</td>
+                                        <td>@order.ShippingPlan.DeliveryCost</td>
+                                        <td>@totalamount</td>
+                                    </tr>
+                                </tbody>
+                            }
+
+                        </table>
+                    </div>
+                    <div>
+                        <div class="ml-1">
+                            <h5>Payment Information</h5>
+                            <span class="mt-0" style="font-style:italic;font-weight:lighter">via Opay</span>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="pt-2 mr-2">
+                                <p>Bank Name:</p>
+                                <p>Account Number:</p>
+                                <p>Account Name:</p>
+                            </div>
+                            <div class="mt-2 ml-3 mr-3" style="height:100px;border:1px solid grey"></div>
+                            <div class="pt-2 ml-2">
+                                <p>First Bank</p>
+                                <p>123456789</p>
+                                <p>Rafael Nadal</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+﻿@model HomePageViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <div class="modal fade" id="track" role="dialog" aria-labelledby="track"
+         aria-hidden="true" style="z-index:99999;">
+        <div class="modal-dialog  modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-center font-weight-bold w-100 text-center modal-title">Track Your Item</h3>
+                    <button id="playCarousel" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12 d-flex rounded">
+                        <div class="col-12">
+                            <p class="text-center px-3">Please fill in the tracking ID provided during purchase.</p>
+                            <form method="Post">
+                                <div asp-validation-summary="ModelOnly"></div>
+                                <div class="row">
+                                    <div class="col-sm-6 m-sm-auto">
+                                        <input type="text" class="w-100" />
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mt-3" id="create-agent__btn">Track</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-landing-page p-5">
+        <div class="container">
+            <div class="row justify-content-center align-content-center">
+                <div class="col-sm-8">
+                    <div class="smallview-contianer">
+                        <h1>
+                            Join The Largest Community of <span class="color-change">
+                                Veterinary Doctors, breed
+                                improvement specialists
+                            </span> e.t.c
+                        </h1>
+                        <br />
+                        <br />
+                        <ul>
+
+                            <li class="smallview"><i>– Buy Fit-for-Slaughter and Traceable Livestock.</i></li>
+                            <li class="smallview">
+                                <i>– Order your Livestock and Get Them Delivered at your Doorstep.</i>
+                            </li>
+                            <li class="smallview"><i>– We Deliver to your address of choice.</i></li>
+                        </ul>
+                        <a href="#" class="btn btn-success mr-3 ">Learn More</a>
+                        <a href="#" class="btn btn-outline-light">Join Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="owl-carousel owl-theme carousel-custom container-fluid min-vh-80">
+
+        @foreach (var item in Model.Slides)
+        {
+            <div class="item d-flex align-content-center justify-content-center">
+                <div class="container-fluid align-content-center m-5">
+                    <div class="row p-5 m-5">
+                        <div class="col-sm-6">
+                            <div class="mr-5" style="text-align:left">
+                                <h1>
+                                    @item.StartText <span class="color-change">@item.ColouredText</span>@item.EndText
+                                </h1>
+
+                                <br /><br />
+
+                                @if (item.Tracked)
+                                {
+                                    <a href="@item.LearnMoreUrl" class="btn btn-success mr-3" data-toggle="modal" id="testcreate-agent__btn" data-target="#track" style="background-color:#06864D;" onclick="stopCarousel()">Track your order</a>
+                                }
+                                else
+                                {
+                                    <a href="@item.LearnMoreUrl" class="btn btn-success mr-3" style="background-color:#06864D;">Learn More</a>
+                                    <a href="@item.JoinNow" class="btn btn-outline-light">Join Now</a>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 image-contianer">
+                            <img style="border-radius:6px; height:380px;"
+                                 src="@item.ImageUrl"
+                                 alt="Alternate Text" class="slide-img" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @*<partial name="_FooterTopPartial" />*@
+    <partial name="_FooterMidPartial" />
+    <partial name="_FooterLowerPartial" />
+</div>

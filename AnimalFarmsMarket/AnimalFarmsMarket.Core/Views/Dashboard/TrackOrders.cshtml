@@ -1,0 +1,93 @@
+﻿@model TrackingHistoryViewModel
+
+<div class="col-sm-12 track-order" id="divtwo" style="padding-top: 70px">
+
+    <div>
+        <h1 class="track-header">Track Order</h1>
+    </div>
+    <div class=" col-sm-10 rounded mx-auto p-5 mb-5" style="background-color: #FFFFFF;
+        box-shadow: rgba(32, 120, 191, 0.35) 0px 5px 15px" ;">
+        <div class="row">
+            <div class="col-sm-6 ">
+                <h3 class="track-subheader">Easily track livestock <br /> with their chip number</h3>
+                <p class="content">
+                    Get to know the status of your order either by location <br /> or condition
+                    and also the specific amount of time it will <br />take the parcel to
+                    get to your current location.
+                </p>
+            </div>
+            <div class="col-sm-6 track-livestock">
+                <div>
+                    <h3 class="track-subheader-right">
+                        Track your live stock
+                    </h3>
+                </div>
+                <div>
+                    <form method="post" asp-controller="Dashboard" asp-action="TrackOrders">
+                        <div class="input-group mb-3">
+                            <input type="text" asp-for="Id" class="form-control track-input" placeholder="input your chip number here">
+                            <div class="input-group-append">
+                                <!---Button trigger modal --->
+                                <button class="btn" type="submit" id="track-order__btn"><img src="~/images/assets/search.png" /></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model != null)
+{
+    <div class="col-sm-12" style="padding-top: 5px; padding-bottom:50px;">
+        <div class=" col-sm-10 rounded mx-auto p-5" style="background-color: #FFFFFF;
+        box-shadow: rgba(32, 120, 191, 0.35) 0px 5px 15px" ;">
+
+
+            <div class="accordion" id="accordionExample">
+
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" style="color:#2078BF" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Tracking History
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show " aria-labelledby="headingOne" data-parent="#accordionExample" style="font-family: 'Ubuntu', sans-serif; color: #838383; font-size: 14px; font-style: normal; font-weight: 400; line-height: 10px; letter-spacing: 0px">
+                        <div class="card-body">
+                            @foreach (var item in ViewData["Histories"] as List<TrackingHistoryViewModel>)
+                             {
+                                <p>Customer Name: @item.CustomerName</p>
+                                <p>Status: @item.Status</p>
+                                <p>Description: @item.Description</p>
+
+                                <p>Location: @item.Location</p>
+                                <p>Order Id: @item.OrderId</p>
+                                <p>Delivery Person Name: @item.DeliveryPersonName</p>
+                                <hr />
+                             }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    $(document).ready(function () {
+        // Add down arrow icon for collapse element which is open by default
+        $(".collapse.show").each(function () {
+            $(this).prev(".heading").find(".fa").addClass("fa-angle-down").removeClass("fa-angle-right");
+        });
+        // Toggle right and down arrow icon on show hide of collapse element
+        $(".collapse").on('show.bs.collapse', function () {
+            $(this).prev(".heading").find(".fa").removeClass("fa-angle-right").addClass("fa-angle-down");
+        }).on('hide.bs.collapse', function () {
+            $(this).prev(".heading").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-right");
+        });
+    });</script>

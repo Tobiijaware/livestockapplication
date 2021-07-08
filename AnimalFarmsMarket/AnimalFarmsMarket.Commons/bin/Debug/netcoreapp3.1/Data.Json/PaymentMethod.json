@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "Online - Pay with e-Wallet",
+    "Description": "Pay with your online wallet, We accept payment from Paystack & Paypay"
+  },
+  {
+    "Name": "Online - Pay with Card",
+    "Description": "Pay directly with your local bank card, our system is secure and your details is surely safe."
+  },
+  {
+    "Name": "Payment on delivery",
+    "Description": "Pay when the order arrives, but you have to pay before unpacking the order."
+  }
+]

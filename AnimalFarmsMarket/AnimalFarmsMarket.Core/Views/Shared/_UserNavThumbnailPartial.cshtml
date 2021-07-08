@@ -1,0 +1,66 @@
+﻿<ul class="nav navbar-nav" style="height: 50px;">
+    <li class="dropdown">
+        <a class="dropdown-toggle text-white text-decoration-none" data-toggle="dropdown"
+           style="width:200px; overflow:hidden; text-overflow:ellipsis; text-align:justify; padding:0px; margin:0px; line-height:10px;">
+            @if (!string.IsNullOrWhiteSpace(HttpContextAccessor.HttpContext.Session.GetString("UserName"))){
+                @HttpContextAccessor.HttpContext.Session.GetString("UserName").Trim();
+            }
+            <br />
+            <span style="font-size:10px;">
+                as
+                @if (!string.IsNullOrWhiteSpace(HttpContextAccessor.HttpContext.Session.GetString("UserRole"))){
+                @HttpContextAccessor.HttpContext.Session.GetString("UserRole");
+                }
+            </span>
+        </a>
+        <ul class="dropdown-menu shadow border-0">
+            @if(ViewBag.Area == "private"){
+            <li><a asp-controller="home" asp-action="index" asp-route-q="update-profile">Home <span class=" pull-right"></span></a></li>
+            }else{
+            @if (!string.IsNullOrWhiteSpace(HttpContextAccessor.HttpContext.Session.GetString("activeStatus"))
+            && HttpContextAccessor.HttpContext.Session.GetString("activeStatus") == "True")
+            {
+            <li><a asp-controller="dashboard" asp-action="index" asp-route-q="update-profile">Dashbaord <span class=" pull-right"></span></a></li>
+            }
+            }
+            <li><a asp-controller="Dashboard" asp-action="Profile" asp-route-q="update-profile">My Profile <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+            @if (!string.IsNullOrWhiteSpace(HttpContextAccessor.HttpContext.Session.GetString("activeStatus"))
+            && HttpContextAccessor.HttpContext.Session.GetString("activeStatus") == "True")
+            {
+            <li class="divider"></li>
+            <li><a asp-controller="Dashboard" asp-action="Orders">Orders <span class="glyphicon glyphicon-stats pull-right"></span></a></li>
+            <li class="divider"></li>
+                @if ((await _authorization.AuthorizeAsync(User, "CustomerRolePolicy")).Succeeded)
+                {
+                <li><a asp-controller="Dashboard" asp-action="Invoice" asp-route-page="1">Invoice</a></li>
+                }
+                <li class="divider"></li>
+                <li><a asp-controller="Dashboard" asp-action="PaymentHistory" asp-route-page="1"> Payments <span class="glyphicon glyphicon-heart pull-right"></span></a></li>
+                <li class="divider"></li>
+                <li><a asp-controller="Dashboard" asp-action="TrackOrders">Track Order <span class="glyphicon glyphicon-heart pull-right"></span></a></li>
+                <li class="divider"></li>
+                @if ((await _authorization.AuthorizeAsync(User, "AdminAndDeliveryRolePolicy")).Succeeded)
+                {
+                <li><a asp-action="DeliveryAssignment" asp-controller="Dashboard">Delivery <span class="glyphicon glyphicon-heart pull-right"></span></a></li>
+                }
+            }
+            <li class="divider"></li>
+            <li>
+                <form asp-controller="Account" asp-action="Logout" method="post"><button class="btn btn-link">Logout</button></form>
+            </li>
+        </ul>
+    </li>
+    @*<li class="nav-item dropdown">
+        <div class="drop">
+            <a href="#">
+                <i class="bi bi-cart2" style="font-size:28px; color:#fff;"></i>
+                <span id="shoppingCart-badge" class="badge badge-light rounded-circle"
+                        style="font-size:10px;color:#2078bf; margin-left:-1em;top:-2em">0</span>
+            </a>
+            <div class="dropdown-content">
+                <div id="menu-cart">
+                </div>
+            </div>
+        </div>
+    </li>*@
+</ul>

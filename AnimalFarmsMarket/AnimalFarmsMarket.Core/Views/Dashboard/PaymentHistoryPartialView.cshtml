@@ -1,0 +1,72 @@
+﻿@model PaginatedResultDto<OrderDetailsViewModel>
+
+
+@if (User.IsInRole("Admin"))
+{
+
+    @foreach (var item in Model.ResponseData)
+    {
+        <tr class="justify-content-between">
+            <td>@item.UserId</td>
+            <td id="product-detail">
+                <a href="#exampleModal" id="product-detail-link" data-toggle="modal" data-target="#exampleModal">
+                    <div id="product-detail-text" class="text-left">
+                        <h6 class="mb-0"><small>@item.Id</small></h6>
+                    </div>
+                </a>
+            </td>
+            <td>NGN @item.PaymentAmount</td>
+            <td>@item.CreatedAt.ToShortDateString()</td>
+            @if (item.Status == 0)
+            {
+                <td><i class="badge badge-pill badge-danger w-100">Cancelled</i></td>
+            }
+            else if (item.Status == 2)
+            {
+                <td><i class="badge badge-pill badge-primary w-100">Pending</i></td>
+            }
+            else
+            {
+                <td><i class="badge badge-pill badge-success w-100">Successful</i></td>
+
+            }
+
+        </tr>
+    }
+
+
+}
+else
+{
+
+
+    @foreach (var item in Model.ResponseData)
+    {
+        <tr class="justify-content-between">
+            <td id="product-detail">
+                <a href="#exampleModal" id="product-detail-link" data-toggle="modal" data-target="#exampleModal">
+                    <div id="product-detail-text" class="text-left">
+                        <h6 class="mb-0"><small>@item.Id</small></h6>
+                    </div>
+                </a>
+            </td>
+            <td>NGN @item.PaymentAmount</td>
+            <td>@item.CreatedAt.ToShortDateString()</td>
+            @if (item.Status == 0)
+            {
+                <td><i class="badge badge-pill badge-danger w-75">Cancelled</i></td>
+            }
+            else if (item.Status == 2)
+            {
+                <td><i class="badge badge-pill badge-primary w-75">Pending</i></td>
+            }
+            else
+            {
+                <td><i class="badge badge-pill badge-success w-75">Successful</i></td>
+
+            }
+
+        </tr>
+    }
+
+}
